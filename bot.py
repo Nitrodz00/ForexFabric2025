@@ -10,7 +10,7 @@ from database import (
     add_referral, get_user_activities, add_task_completion, reset_user_points,
     social_media_visit, get_social_media_visits
 )
-from config import SOCIAL_MEDIA_LINKS, WEBAPP_URL, TELEGRAM_TOKEN
+from config import SOCIAL_MEDIA_LINKS, WEBAPP_URL, 8125867347:AAFEh8OYVL-JpYGj1l6RRCXBqE7tG0WOzQQ
 
 # إعداد السجلات
 logging.basicConfig(
