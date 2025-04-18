@@ -3,7 +3,7 @@ import os
 # استرجاع متغيرات البيئة المطلوبة
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "8125867347:AAFEh8OYVL-JpYGj1l6RRCXBqE7tG0WOzQQ")
 DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/points_db")
-WEBAPP_URL = os.environ.get("WEBAPP_URL", "https://forexfabric.replit.app")
+WEBAPP_URL = os.environ.get("WEBAPP_URL", "https://nitrodz00.github.io/ForexFabric2025/")
 
 # إعدادات نظام النقاط
 DAILY_POINTS = 10  # نقاط المكافأة اليومية
