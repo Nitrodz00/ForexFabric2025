@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>نظام نقاط Forex Fabric</title>
+    <meta name="generator" content="Jekyll v3.10.0" />
+    <meta property="og:title" content="نظام نقاط Forex Fabric" />
+    <meta property="og:locale" content="ar" />
+    <meta property="og:type" content="website" />
+    
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    
+    <!-- تضمين الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --amber-400: #FBBF24;
+        --amber-500: #F59E0B;
+        --amber-600: #D97706;
+        --yellow-300: #FCD34D;
+        --yellow-400: #FBBF24;
+        --yellow-500: #F59E0B;
+        --zinc-400: #A1A1AA;
+        --zinc-700: #3F3F46;
+        --zinc-800: #27272A;
+        --zinc-900: #18181B;
+      }
+      
+      body {
+        font-family: 'Cairo', sans-serif;
+      }
+      
+      .container-lg.px-3.my-5.markdown-body {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: linear-gradient(to bottom, var(--zinc-900), #000);
+        border: 2px solid var(--amber-400);
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+      }
+      
+      h1, h2 {
+        color: var(--amber-400);
+      }
+      
+      a {
+        color: var(--amber-500);
+      }
+      
+      code {
+        background-color: var(--zinc-800);
+        color: var(--amber-400);
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      
+      .highlighter-rouge {
+        margin: 20px 0;
+      }
+      
+      .highlight pre {
+        background-color: var(--zinc-800);
+        border-radius: 8px;
+        padding: 15px;
+      }
+      
+      .user-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+      
+      .stat-card {
+        background-color: var(--zinc-800);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--amber-400);
+      }
+      
+      .stat-label {
+        font-size: 0.875rem;
+        color: var(--zinc-400);
+      }
+      
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 2rem 0;
+        justify-content: center;
+      }
+      
+      .action-button {
+        background-color: var(--zinc-800);
+        color: var(--amber-400);
+        border: 1px solid var(--amber-500);
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .action-button:hover {
+        background-color: var(--amber-500);
+        color: var(--zinc-900);
+      }
+      
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background-color: var(--zinc-800);
+        color: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid var(--amber-400);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(150%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        max-width: 300px;
+      }
+      
+      .toast.show {
+        transform: translateY(0);
+      }
+      
+      .toast-title {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--amber-400);
+      }
+      
+      #activities-container {
+        background-color: var(--zinc-800);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-top: 2rem;
+      }
+      
+      .activity-item {
+        border-bottom: 1px solid var(--zinc-700);
+        padding: 0.75rem 0;
+      }
+      
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+      
+      .activity-date {
+        font-size: 0.75rem;
+        color: var(--zinc-400);
+      }
+      
+      .activity-points {
+        font-weight: 700;
+        color: var(--amber-400);
+      }
+      
+      @media (max-width: 768px) {
+        .user-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="/">نظام نقاط Forex Fabric</a></h1>
+      
+      <div id="user-data-container">
+        <div class="user-stats">
+          <div class="stat-card">
+            <div class="stat-value" id="current-points">--</div>
+            <div class="stat-label">رصيد النقاط الحالي</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="total-points">--</div>
+            <div class="stat-label">إجمالي النقاط المكتسبة</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="referrals-count">--</div>
+            <div class="stat-label">عدد الإحالات</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="next-claim-time">--</div>
+            <div class="stat-label">الوقت المتبقي للمطالبة التالية</div>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <button id="daily-claim-btn" class="action-button">المطالبة اليومية</button>
+          <button id="tasks-btn" class="action-button">المهام المتاحة</button>
+          <button id="referral-btn" class="action-button">دعوة صديق</button>
+          <button id="leaderboard-btn" class="action-button">لوحة المتصدرين</button>
+        </div>
+        
+        <div id="activities-container">
+          <h2>آخر النشاطات</h2>
+          <div id="activities-list">
+            <!-- ستتم إضافة بيانات النشاطات هنا ديناميكيًا -->
+          </div>
+        </div>
+      </div>
+
+      <h2 id="المميزات">المميزات</h2>
+
+      <ul>
+        <li>مكافآت يومية للمستخدمين</li>
+        <li>نظام إحالات لكسب نقاط إضافية</li>
+        <li>واجهة ويب متكاملة باللغة العربية</li>
+        <li>بوت تيليجرام سهل الاستخدام</li>
+        <li>لوحة متصدرين</li>
+        <li>سجل نشاطات المستخدم</li>
+        <li>مهام متنوعة لكسب النقاط</li>
+      </ul>
+
+      <h2 id="أوامر-البوت">أوامر البوت</h2>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">/start</code> - بدء البوت وفتح تطبيق الويب</li>
+        <li><code class="language-plaintext highlighter-rouge">/daily_claim</code> - الحصول على النقاط اليومية</li>
+        <li><code class="language-plaintext highlighter-rouge">/balance</code> - عرض رصيدك الحالي</li>
+        <li><code class="language-plaintext highlighter-rouge">/referral</code> - الحصول على رابط الإحالة الخاص بك</li>
+        <li><code class="language-plaintext highlighter-rouge">/tasks</code> - عرض المهام المتاحة</li>
+        <li><code class="language-plaintext highlighter-rouge">/history</code> - عرض تاريخ نشاطاتك</li>
+        <li><code class="language-plaintext highlighter-rouge">/help</code> - عرض قائمة المساعدة</li>
+      </ul>
+
+      <h2 id="المؤلف">المؤلف</h2>
+
+      <p>Forex Fabric Team - 2025</p>
+    </div>
+
+    <div class="toast" id="toast">
+      <div class="toast-title" id="toast-title">تم بنجاح!</div>
+      <div id="toast-description">تم تنفيذ العملية بنجاح.</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script>anchors.add();</script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+fastapi==0.95.2
+flask==2.3.2
+flask-login==0.6.2
+flask-sqlalchemy==3.0.5
+gunicorn==23.0.0
+nest-asyncio==1.5.6
+psycopg2-binary==2.9.6
+python-telegram-bot==13.14
+sqlalchemy==2.0.16
+telegram==0.0.1
+uvicorn==0.22.0
+werkzeug==2.3.6
